@@ -1,0 +1,33 @@
+<div hlListbox [value]="selectedTheme" (valueChange)="setSelectedTheme($event)">
+  <button hlListboxButton
+    class="flex h-6 w-6 items-center justify-center rounded-lg shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-700 dark:ring-inset dark:ring-white/5">
+    <span class="sr-only">{{selectedTheme?.name}}</span>
+    <!--
+    <LightIcon class="hidden h-4 w-4 fill-sky-400 [[data-theme=light]_&]:block" />
+    <DarkIcon class="hidden h-4 w-4 fill-sky-400 [[data-theme=dark]_&]:block" />
+    <LightIcon class="hidden h-4 w-4 fill-slate-400 [:not(.dark)[data-theme=system]_&]:block" />
+    <DarkIcon class="hidden h-4 w-4 fill-slate-400 [.dark[data-theme=system]_&]:block" />
+    -->
+  </button>
+  <ul *hlListboxOptions
+    class="absolute top-full left-1/2 mt-3 w-36 -translate-x-1/2 space-y-1 rounded-xl bg-white p-3 text-sm font-medium shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-800 dark:ring-white/5">
+    <ng-container *ngFor="let theme of themes">
+      <li *hlListboxOption="let option; value: theme;"
+        class="flex cursor-pointer select-none items-center rounded-[0.625rem] p-1" [ngClass]="{
+          'text-sky-500': option.selected,
+           'text-slate-900 dark:text-white': option.active && !option.selected,
+           'text-slate-700 dark:text-slate-400': !option.active && !option.selected,
+           'bg-slate-100 dark:bg-slate-900/40': option.active
+          }">
+        <span class="w-5 inline-block">
+          <ng-container *ngIf="option.selected">✔</ng-container>
+        </span>
+        <div
+          class="rounded-md bg-white p-1 shadow ring-1 ring-slate-900/5 dark:bg-slate-700 dark:ring-inset dark:ring-white/5">
+          I
+        </div>
+        <div class="ml-3">{{theme.name}}</div>
+      </li>
+    </ng-container>
+  </ul>
+</div>
